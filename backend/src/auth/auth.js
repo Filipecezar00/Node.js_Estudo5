@@ -29,7 +29,7 @@ passport.use(
         16,
         "sha256",
         (error, hashedPassword) => {
-          if (err) {
+          if (error) {
             return callback(err, false);
           }
           const userPasswordBuffer = Buffer.from(user.password.buffer);
@@ -82,10 +82,10 @@ authRouter.post("/signup", async (req, res) => {
         password: hashedPassword,
         salt,
       });
-      if (result.insertedID) {
+      if (result.insertedId) {
         const user = await Mongo.db
           .collection(collectionName)
-          .findOne({ _id: new ObjectId(result.insertedID) });
+          .findOne({ _id: new ObjectId(result.insertedId) });
         const token = jwt.sign(user, "secret");
 
         return res.send({
