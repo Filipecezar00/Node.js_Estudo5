@@ -7,11 +7,22 @@ export default class UsersControllers {
   }
   async getUsers() {
     try {
-      const users = this.dataAccess.getUsers();
+      const users = await this.dataAccess.getUsers();
+      console.log(users);
 
       return ok(users);
     } catch (e) {
       return serverError(e);
+    }
+  }
+
+  async deleteUser(userId) {
+    try {
+      const result = await this.dataAccess.deleteUser(userId);
+
+      return ok(result);
+    } catch (error) {
+      return serverError(error);
     }
   }
 }
