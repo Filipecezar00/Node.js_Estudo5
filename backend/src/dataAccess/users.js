@@ -1,6 +1,10 @@
 import { Mongo } from "../../database/mongo.js";
-import { ObjectId } from "mongodb";
+import { ObjectId, ReturnDocument } from "mongodb";
 import crypto from "crypto";
+import { serverError } from "../helpers/httpResponse.js";
+import { error } from "console";
+import { promisify } from "util";
+const pbkdf2Promise = promisify(crypto.pbkdf2);
 
 const collectionName = "users";
 
@@ -19,5 +23,27 @@ export default class UsersDataAccess {
     return result;
   }
 
-  async updateUser() {}
+  async updateUser(userId, userData) {
+    if (userData.password) {
+      const salt = crypto.randomBytes(16);
+
+      const hashedPassword = await pbkdf2Promise(
+        userData.password,
+        salt,
+        310000,
+        16,
+        "sha256",
+      );
+      userData.password = hashedPassword;
+      userData.salt = salt;
+    }
+    const result = await Mongo.db
+      .collection(collectionName)
+      .findOneAndUpdate(
+        { _id: new ObjectId(userId) },
+        { $set: userData },
+        { returnDocument: "after" },
+      );
+    return result;
+  }
 }
