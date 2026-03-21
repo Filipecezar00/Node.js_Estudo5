@@ -1,60 +1,43 @@
-{
-    "name":"Squid Stew with Peas", 
-    "price":18.90,
-    "available":false, 
-    "description":"Fresh squid slowly cooked in a stew with fresh pass and tomatoes reveal an explosion", 
-    "ingredients":[
-        "Fresh squid",
-        "Fresh peas", 
-        "tomatoes"
-    ], 
-    "category":"First"
-},
-{
-    "name":"Shrimp and Vegetable Salad", 
-    "price":18.99,
-    "available":true, 
-    "description":"A fresh mixed salad with cooked shrimp, seasonal vegetables, and a secret dressing", 
-    "ingredients":[
-        "cooked shrimp",
-        "Seasonal vegetables", 
-        "salad dressing"
-    ], 
-    "category":"Side"
-},
+[
+  {
+    "name": "Squid Stew with Peas",
+    "price": 18.9,
+    "available": false,
+    "description": "Fresh squid slowly cooked in a stew with fresh pass and tomatoes reveal an explosion",
+    "ingredients": ["Fresh squid", "Fresh peas", "tomatoes"],
+    "category": "First"
+  },
+  {
+    "name": "Shrimp and Vegetable Salad",
+    "price": 18.99,
+    "available": true,
+    "description": "A fresh mixed salad with cooked shrimp, seasonal vegetables, and a secret dressing",
+    "ingredients": ["cooked shrimp", "Seasonal vegetables", "salad dressing"],
+    "category": "Side"
+  },
 
-{
-    "name":"Lasagna Bolognese", 
-    "price":11.90,
-    "available":true, 
-    "description":"Layers at egg pasta interspersed with a rich sinced neat sauce and a gorgeus flavor", 
-    "ingredients":[
-        "pasta",
-        "basil", 
-        "sauce"
-    ], 
-    "category":"First"
-}, 
-{
-    "name":"Tortellini in Chicken Bread", 
-    "price":8.90,
-    "available":true,
-    "description":"Our homemade tortellari, filled with meet, float in a warn chicken broth, bringing flavor for you", 
-    "ingredients":[
-        "Homemade tortellini",
-        "Chicken broth", 
-    ], 
-    "category":"First"
-}, 
-{
-    "name":"whole grain Bread", 
-    "price":5.99,
-    "available":true,  
-    "description":"Freshly baked whole grain bread, crispy on the outside and soft on the inside, perfect flavor", 
-    "ingredients":[
-        "salt",
-        "water", 
-        "whole grain flour"
-    ], 
-    "category":"Other"
-}, 
+  {
+    "name": "Lasagna Bolognese",
+    "price": 11.9,
+    "available": true,
+    "description": "Layers at egg pasta interspersed with a rich sinced neat sauce and a gorgeus flavor",
+    "ingredients": ["pasta", "basil", "sauce"],
+    "category": "First"
+  },
+  {
+    "name": "Tortellini in Chicken Bread",
+    "price": 8.9,
+    "available": true,
+    "description": "Our homemade tortellari, filled with meet, float in a warn chicken broth, bringing flavor for you",
+    "ingredients": ["Homemade tortellini", "Chicken broth"],
+    "category": "First"
+  },
+  {
+    "name": "whole grain Bread",
+    "price": 5.99,
+    "available": true,
+    "description": "Freshly baked whole grain bread, crispy on the outside and soft on the inside, perfect flavor",
+    "ingredients": ["salt", "water", "whole grain flour"],
+    "category": "Other"
+  }
+]

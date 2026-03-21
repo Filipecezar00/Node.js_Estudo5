@@ -8,7 +8,7 @@ export default class PlatesControllers {
   async getPlates() {
     try {
       const plates = await this.dataAccess.getPlates();
-      console.log(users);
+      console.log(plates);
 
       return ok(plates);
     } catch (e) {

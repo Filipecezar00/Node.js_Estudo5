@@ -1,26 +1,38 @@
 import express from "express";
-import UsersControllers from "../controllers/users.js";
+import PlatesControllers from "../controllers/plates.js";
 
-const usersRouter = express.Router();
+const platesRouter = express.Router();
+const platesControllers = new PlatesControllers();
 
-const usersControllers = new UsersControllers();
-
-usersRouter.get("/", async (req, res) => {
-  const { success, statusCode, body } = await usersControllers.getUsers();
+platesRouter.get("/", async (req, res) => {
+  const { success, statusCode, body } = await platesControllers.getPlates();
 
   res.status(statusCode).send({ success, body, statusCode });
 });
 
-usersRouter.delete("/:id", async (req, res) => {
-  const userId = req.params.id;
+platesRouter.get("/availables/", async (req, res) => {
+  const { body, success, statusCode } =
+    await platesControllers.getAvailablePlates();
+  res.status(statusCode).send({ body, success, statusCode });
+});
+
+platesRouter.post("/", async (req, res) => {
+  const { body, success, statusCode } = await platesControllers.addPlate(
+    req.body,
+  );
+  res.status(statusCode).send({ body, success, statusCode });
+});
+
+platesRouter.delete("/:id", async (req, res) => {
+  const platesId = req.params.id;
   const { success, statusCode, body } =
-    await usersControllers.deleteUser(userId);
+    await platesControllers.deletePlate(platesId);
 
   res.status(statusCode).send({ success, statusCode, body });
 });
 
-usersRouter.put("/:id", async (req, res) => {
-  const { success, statusCode, body } = await usersControllers.updateUser(
+platesRouter.put("/:id", async (req, res) => {
+  const { success, statusCode, body } = await platesControllers.updatePlate(
     req.params.id,
     req.body,
   );
@@ -28,4 +40,4 @@ usersRouter.put("/:id", async (req, res) => {
   res.status(statusCode).send({ success, statusCode, body });
 });
 
-export default usersRouter;
+export default platesRouter;
