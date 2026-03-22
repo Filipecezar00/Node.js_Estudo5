@@ -1,13 +1,13 @@
-import PlatesDataAccess from "../dataAccess/place.js";
+import PlatesDataAccess from "../dataAccess/plate.js";
 import { ok, serverError } from "../helpers/httpResponse.js";
 
 export default class PlatesControllers {
   constructor() {
     this.dataAccess = new PlatesDataAccess();
   }
-  async getPlates() {
+  async getPlate() {
     try {
-      const plates = await this.dataAccess.getPlates();
+      const plates = await this.dataAccess.getPlate();
       console.log(plates);
 
       return ok(plates);
@@ -26,9 +26,9 @@ export default class PlatesControllers {
     }
   }
 
-  async addPlate(plateData) {
+  async addPlates(plateData) {
     try {
-      const result = await this.dataAccess.addPlate(plateData);
+      const result = await this.dataAccess.addPlates(plateData);
 
       return ok(result);
     } catch (error) {

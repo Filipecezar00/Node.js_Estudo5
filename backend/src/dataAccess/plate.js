@@ -1,10 +1,10 @@
 import { Mongo } from "../../database/mongo.js";
-import { ObjectId, ReturnDocument } from "mongodb";
+import { ObjectId } from "mongodb";
 
 const collectionName = "plates";
 
 export default class PlatesDataAccess {
-  async getPlate() {
+  async getPlates() {
     const result = await Mongo.db.collection(collectionName).find({}).toArray();
     return result;
   }
@@ -17,23 +17,23 @@ export default class PlatesDataAccess {
     return result;
   }
 
-  async addPlates(plateData) {
-    const result = await Mongo.db
-      .collection(collectionName)
-      .insertOne(plateData);
-
-    return result;
+  async addPlate(plateData) {
+    if (Array.isArray(plateData)) {
+      return await Mongo.db.collection(collectionName).insertMany(plateData);
+    }
+    return await Mongo.db.collection(collectionName).insertOne(plateData);
   }
 
   async deletePlate(plateId) {
+    if (!ObjectId.isValid(plateId)) throw new Error("ID inválido");
     const result = await Mongo.db
       .collection(collectionName)
       .findOneAndDelete({ _id: new ObjectId(plateId) });
-
     return result;
   }
 
   async updatePlate(plateId, plateData) {
+    if (!ObjectId.isValid(plateId)) throw new Error("ID inválido");
     const result = await Mongo.db
       .collection(collectionName)
       .findOneAndUpdate(

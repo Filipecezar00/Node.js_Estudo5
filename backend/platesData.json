@@ -4,7 +4,7 @@
     "price": 18.9,
     "available": false,
     "description": "Fresh squid slowly cooked in a stew with fresh pass and tomatoes reveal an explosion",
-    "ingredients": ["Fresh squid", "Fresh peas", "tomatoes"],
+    "ingredients": ["Fresh squid, Fresh peas, tomatoes"],
     "category": "First"
   },
   {
@@ -12,7 +12,7 @@
     "price": 18.99,
     "available": true,
     "description": "A fresh mixed salad with cooked shrimp, seasonal vegetables, and a secret dressing",
-    "ingredients": ["cooked shrimp", "Seasonal vegetables", "salad dressing"],
+    "ingredients": ["cooked shrimp, Seasonal vegetables, salad dressing"],
     "category": "Side"
   },
 
@@ -21,7 +21,7 @@
     "price": 11.9,
     "available": true,
     "description": "Layers at egg pasta interspersed with a rich sinced neat sauce and a gorgeus flavor",
-    "ingredients": ["pasta", "basil", "sauce"],
+    "ingredients": ["pasta, basil, sauce"],
     "category": "First"
   },
   {
@@ -29,7 +29,7 @@
     "price": 8.9,
     "available": true,
     "description": "Our homemade tortellari, filled with meet, float in a warn chicken broth, bringing flavor for you",
-    "ingredients": ["Homemade tortellini", "Chicken broth"],
+    "ingredients": ["Homemade tortellini, Chicken broth"],
     "category": "First"
   },
   {
@@ -37,7 +37,7 @@
     "price": 5.99,
     "available": true,
     "description": "Freshly baked whole grain bread, crispy on the outside and soft on the inside, perfect flavor",
-    "ingredients": ["salt", "water", "whole grain flour"],
+    "ingredients": ["salt, water, whole grain flour"],
     "category": "Other"
   }
 ]
