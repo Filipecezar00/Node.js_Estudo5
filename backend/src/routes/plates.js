@@ -5,8 +5,9 @@ const platesRouter = express.Router();
 const platesControllers = new PlatesControllers();
 
 platesRouter.get("/", async (req, res) => {
-  const { success, statusCode, body } = await platesControllers.getPlates();
-
+  const { success, statusCode, body } = await platesControllers.getPlates(
+    req.body,
+  );
   res.status(statusCode).send({ success, body, statusCode });
 });
 

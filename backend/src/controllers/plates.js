@@ -5,9 +5,9 @@ export default class PlatesControllers {
   constructor() {
     this.dataAccess = new PlatesDataAccess();
   }
-  async getPlate() {
+  async getPlates() {
     try {
-      const plates = await this.dataAccess.getPlate();
+      const plates = await this.dataAccess.getPlates();
       console.log(plates);
 
       return ok(plates);

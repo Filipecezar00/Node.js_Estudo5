@@ -14,14 +14,20 @@ async function main() {
 
   const app = express();
 
-  const mongoConnection = await Mongo.connect({
-    mongoConnectionString: process.env.MONGO_CS,
-    mongoDbName: process.env.MONGO_DB_NAME,
-  });
-  console.log(mongoConnection);
+  try {
+    const mongoConnection = await Mongo.connect({
+      mongoConnectionString: process.env.MONGO_CS,
+      mongoDbName: process.env.MONGO_DB_NAME,
+    });
+    console.log(mongoConnection);
+  } catch (error) {
+    console.error("Erro ao Conectar no banco:", error);
+  }
 
   app.use(express.json());
   app.use(cors());
+
+  app.get("/ping", (req, res) => res.send("pong"));
 
   app.get("/", (req, res) => {
     res.send({
@@ -33,10 +39,12 @@ async function main() {
 
   app.use("/auth", authRouter);
   app.use("/users", usersRouter);
+  app.get("/teste-direto", (req, res) => res.send("OK"));
   app.use("/plates", platesRouter);
 
   app.listen(port, () => {
     console.log(`Server Running on http://${hostname}:${port}`);
   });
 }
+
 main();
