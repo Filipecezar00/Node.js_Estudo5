@@ -3,7 +3,7 @@ import { ok, serverError } from "../helpers/httpResponse.js";
 
 export default class OrdersControllers {
   constructor() {
-    this.dataAccess = OrdersDataAccess();
+    this.dataAccess = new OrdersDataAccess();
   }
   async Orders() {
     try {

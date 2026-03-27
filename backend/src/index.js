@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import authRouter from "./auth/auth.js";
 import usersRouter from "./routes/users.js";
 import platesRouter from "./routes/plates.js";
+import ordersRouter from "./routes/orders.js";
 
 config();
 
@@ -27,8 +28,6 @@ async function main() {
   app.use(express.json());
   app.use(cors());
 
-  app.get("/ping", (req, res) => res.send("pong"));
-
   app.get("/", (req, res) => {
     res.send({
       success: true,
@@ -39,8 +38,8 @@ async function main() {
 
   app.use("/auth", authRouter);
   app.use("/users", usersRouter);
-  app.get("/teste-direto", (req, res) => res.send("OK"));
   app.use("/plates", platesRouter);
+  app.use("/orders", ordersRouter);
 
   app.listen(port, () => {
     console.log(`Server Running on http://${hostname}:${port}`);
