@@ -5,7 +5,7 @@ export default class OrdersControllers {
   constructor() {
     this.dataAccess = new OrdersDataAccess();
   }
-  async Orders() {
+  async getOrders() {
     try {
       const orders = await this.dataAccess.getOrders();
       console.log(orders);
