@@ -12,6 +12,7 @@ export default class OrdersControllers {
 
       return ok(orders);
     } catch (e) {
+      console.log("ERRO NO PROCESSO DA ROTA GET:", e);
       return serverError(e);
     }
   }
