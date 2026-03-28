@@ -8,12 +8,22 @@ export default class OrdersControllers {
   async getOrders() {
     try {
       const orders = await this.dataAccess.getOrders();
-      console.log(orders);
 
       return ok(orders);
-    } catch (e) {
-      console.log("ERRO NO PROCESSO DA ROTA GET:", e);
-      return serverError(e);
+    } catch (error) {
+      console.error("ERRO NO PROCESSO DA ROTA GET:", error);
+      return serverError(error);
+    }
+  }
+
+  async getOrdersByUserId(userId) {
+    try {
+      const orderId = await this.dataAccess.getOrdersByUserId(userId);
+
+      return ok(orderId);
+    } catch (error) {
+      console.error("ERRO NO PROCESSO DA ROTA GET DO ID USER:", error);
+      return serverError(error);
     }
   }
 

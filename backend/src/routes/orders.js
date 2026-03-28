@@ -10,6 +10,13 @@ ordersRouter.get("/", async (req, res) => {
   );
   res.status(statusCode).send({ success, body, statusCode });
 });
+
+ordersRouter.get("/:id", async (req, res) => {
+  const { success, statusCode, body } =
+    await OrderControllers.getOrdersByUserId(req.params.id);
+  res.status(statusCode).send({ success, body, statusCode });
+});
+
 ordersRouter.post("/", async (req, res) => {
   const { body, success, statusCode } = await OrderControllers.addOrders(
     req.body,
