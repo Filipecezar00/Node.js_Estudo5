@@ -29,6 +29,9 @@ export default class OrdersControllers {
 
   async addOrders(OrdersData) {
     try {
+      if (!OrdersData.userId || !OrdersData.items) {
+        return badRequest("Campos obrigatórios faltando");
+      }
       const result = await this.dataAccess.addOrders(OrdersData);
 
       return ok(result);

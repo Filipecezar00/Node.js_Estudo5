@@ -55,7 +55,7 @@ export default class OrdersDataAccess {
   }
 
   async addOrders(OrderData) {
-    const { itens, ...OrderDataRest } = OrderData;
+    const { items, ...OrderDataRest } = OrderData;
 
     OrderDataRest.createdAt = new Date();
     OrderDataRest.pickupStatus = "Pending";
@@ -69,21 +69,32 @@ export default class OrdersDataAccess {
       throw new Error("Order cannot be inserted");
     }
 
-    itens.map((item) => {
+    items.map((item) => {
       item.plateId = new ObjectId(item.plateId);
       item.orderId = new ObjectId(newOrder.insertedId);
     });
 
-    const result = await Mongo.db.collection("OrderItens").insertMany(itens);
+    const result = await Mongo.db.collection("OrderItens").insertMany(items);
 
     return result;
   }
 
   async deleteOrder(OrderId) {
     if (!ObjectId.isValid(OrderId)) throw new Error("ID inválido");
-    const result = await Mongo.db
+
+    const itemsToDelete = await Mongo.db
+      .collection("orderItems")
+      .deleteMany({ OrderId: new ObjectId(OrderId) });
+
+    const orderToDelete = await Mongo.db
       .collection(collectionName)
       .findOneAndDelete({ _id: new ObjectId(OrderId) });
+
+    const result = {
+      itemsToDelete,
+      orderToDelete,
+    };
+
     return result;
   }
 
