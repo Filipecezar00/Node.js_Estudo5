@@ -42,8 +42,7 @@ export default class OrdersControllers {
 
   async deleteOrders(OrdersId) {
     try {
-      const result = await this.dataAccess.deleteOrders(OrdersId);
-
+      const result = await this.dataAccess.deleteOrder(OrdersId);
       return ok(result);
     } catch (error) {
       return serverError(error);
