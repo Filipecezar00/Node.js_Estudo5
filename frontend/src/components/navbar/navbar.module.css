@@ -1,0 +1,28 @@
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  background-color: #004643;
+  height: 96px;
+}
+.logo {
+  width: 4em;
+}
+.navbarItems {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.navbarLink {
+  color: #faf0ca;
+  text-decoration: none;
+}
+
+.navbarLinksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
