@@ -2,8 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/home copy/pages.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/home/pages.jsx";
 import Cart from "./pages/cart/pages.jsx";
 import Profile from "./pages/profile/pages.jsx";
 import Auth from "./pages/auth/pages.jsx";
@@ -23,4 +23,8 @@ const pages = createBrowserRouter([
   },
 ]);
 
-creatRoot(document.getElementById("root")).render(<StrictMode></StrictMode>);
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <RouterProvider router={pages}></RouterProvider>
+  </StrictMode>,
+);
