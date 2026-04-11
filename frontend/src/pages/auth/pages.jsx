@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import style from "./page.module.css";
 import authServices from "../../services/auth";
 
 export default function Auth() {
   const [formType, setFormType] = useState("login");
-  const [formData, setFormData] = useState(null);
-  const { login, signup } = authServices();
+  const [formData, setFormData] = useState({});
+  const { login, signup, authLoading } = authServices();
 
+  useEffect(() => {
+    setFormData(null);
+  }, [formData]);
   const handleChangeFormType = () => {
     setFormData(null);
     if (formType === "login") {
@@ -25,21 +28,29 @@ export default function Auth() {
     console.log(e);
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
     switch (formType) {
       case "login":
         login(formData);
         break;
       case "signup":
+        if (!formData?.password || !formData?.ConfirmPassword) {
+          console.log("Por favor, preencha as senhas");
+          return;
+        }
         if (formData.password !== formData.ConfirmPassword) {
           console.log("Passwords do not match");
           return;
         }
-        signup(formData);
+        await signup(formData);
         break;
     }
   };
+
+  if (authLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   if (formType === "login") {
     return (

@@ -31,7 +31,7 @@ passport.use(
         "sha256",
         (error, hashedPassword) => {
           if (error) {
-            return callback(err, false);
+            return callback(error, false);
           }
           const userPasswordBuffer = Buffer.from(user.password.buffer);
           if (!crypto.timingSafeEqual(userPasswordBuffer, hashedPassword)) {
