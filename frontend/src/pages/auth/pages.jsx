@@ -8,16 +8,9 @@ export default function Auth() {
   const [formData, setFormData] = useState({});
   const { login, signup, authLoading } = authServices();
 
-  useEffect(() => {
-    setFormData(null);
-  }, [formData]);
   const handleChangeFormType = () => {
-    setFormData(null);
-    if (formType === "login") {
-      setFormType("signup");
-    } else {
-      setFormType("login");
-    }
+    setFormData({});
+    setFormType(formType === "login" ? "signup" : "login");
   };
 
   const handleFormDataChange = (e) => {
@@ -30,16 +23,18 @@ export default function Auth() {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+
+    console.log("Contéudo do formData agora:", formData);
     switch (formType) {
       case "login":
         login(formData);
         break;
       case "signup":
-        if (!formData?.password || !formData?.ConfirmPassword) {
+        if (!formData?.password || !formData?.confirmpassword) {
           console.log("Por favor, preencha as senhas");
           return;
         }
-        if (formData.password !== formData.ConfirmPassword) {
+        if (formData.password !== formData.confirmpassword) {
           console.log("Passwords do not match");
           return;
         }
@@ -114,7 +109,7 @@ export default function Auth() {
             required
             label="Confirm password"
             type="password"
-            name="ConfirmPassword"
+            name="confirmpassword"
             onChange={handleFormDataChange}
           />
           <Button type="submit">Signup</Button>
