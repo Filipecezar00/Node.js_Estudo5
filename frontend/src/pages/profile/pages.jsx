@@ -10,5 +10,14 @@ export default function Profile() {
       return navigate("/auth");
     }
   }, []);
-  return <h1>Profile</h1>;
+
+  const handleLogout = () => {};
+
+  return (
+    <>
+      <h1>{authData?.user?.fullname}</h1>
+      <h3>{authData?.user?.email}</h3>
+      <button onClick={handleLogout}>Logout</button>
+    </>
+  );
 }

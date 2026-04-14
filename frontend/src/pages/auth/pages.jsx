@@ -16,7 +16,7 @@ export default function Auth() {
     if (authData) {
       return navigate("/profile");
     }
-  });
+  }, []);
 
   const handleChangeFormType = () => {
     setFormData({});

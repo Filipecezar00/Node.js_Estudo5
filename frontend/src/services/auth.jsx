@@ -36,7 +36,23 @@ export default function authServices() {
       });
   };
   const logout = (form) => {};
-  const signup = (formData) => {};
+
+  const signup = async (formData) => {
+    setAuthLoading(true);
+    try {
+      const response = await fetch(`${url}/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw error;
+    } finally {
+      setAuthLoading(false);
+    }
+  };
 
   return { signup, login, logout, authLoading };
 }
