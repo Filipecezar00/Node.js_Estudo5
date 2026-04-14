@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import authServices from "../../services/auth";
 
 export default function Profile() {
+  const { logout } = authServices();
   const navigate = useNavigate();
   const authData = JSON.parse(localStorage.getItem("auth"));
 
@@ -9,9 +11,12 @@ export default function Profile() {
     if (!authData) {
       return navigate("/auth");
     }
-  }, []);
+  }, [authData]);
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    logout();
+    return navigate("/auth");
+  };
 
   return (
     <>

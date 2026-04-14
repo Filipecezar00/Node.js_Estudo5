@@ -5,37 +5,39 @@ export default function authServices() {
 
   const url = "http://localhost:3000/auth";
 
-  const login = (formData) => {
+  const login = async (formData) => {
     setAuthLoading(true);
-    fetch(`${url}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        if (result.success && result.body.token) {
-          localStorage.setItem(
-            "auth",
-            JSON.stringify({
-              token: result.body.token,
-              user: result.body.user,
-            }),
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAuthLoading(false);
+
+    try {
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+      const result = await response.json();
+
+      if (result.success && result.body.token) {
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            token: result.body.token,
+            user: result.body.user,
+          }),
+        );
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+      return { success: false };
+    } finally {
+      setAuthLoading(false);
+    }
   };
-  const logout = (form) => {};
+  const logout = (form) => {
+    localStorage.removeItem("auth");
+  };
 
   const signup = async (formData) => {
     setAuthLoading(true);

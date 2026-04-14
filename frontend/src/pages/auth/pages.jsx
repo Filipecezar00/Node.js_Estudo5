@@ -34,10 +34,20 @@ export default function Auth() {
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
-    console.log("Contéudo do formData agora:", formData);
     switch (formType) {
       case "login":
-        login(formData);
+        console.log("Iniciando chamada de login...");
+        const res = await login(formData);
+
+        console.log("Resposta recebida do hook:", res);
+
+        if (res && res.success) {
+          console.log("Sucesso!, Redirecionando");
+          navigate("/profile");
+        } else {
+          console.log("Falha: A condição 'res.success' não foi atendida.");
+        }
+
         break;
       case "signup":
         if (!formData?.password || !formData?.confirmpassword) {
@@ -49,6 +59,7 @@ export default function Auth() {
           return;
         }
         await signup(formData);
+        setFormType("login");
         break;
     }
   };
