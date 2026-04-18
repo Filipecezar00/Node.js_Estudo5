@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authServices from "../../services/auth";
 import orderServices from "../../services/order";
@@ -9,26 +9,26 @@ export default function Profile() {
   const { getUserOrders, orderLoading, refetchOrders, ordersList } =
     orderServices();
   const navigate = useNavigate();
-  const authData = JSON.parse(localStorage.getItem("auth"));
+  const [authData] = useState(() => JSON.parse(localStorage.getItem("auth")));
 
   useEffect(() => {
-    if (!authData) {
-      return navigate("/auth");
-    } else if (refetchOrders) {
-      getUserOrders(authData?.user?._id);
+    if (!authData || !authData.user) {
+      navigate("/auth");
+      return;
     }
-  }, [authData, refetchOrders]);
+    if (refetchOrders) {
+      getUserOrders(authData.user._id);
+    }
+  }, [authData?.user?._id, refetchOrders, navigate, getUserOrders]);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth");
+  };
 
   if (orderLoading) {
     return <h1>Loading...</h1>;
   }
-
-  const handleLogout = () => {
-    logout();
-    return navigate("/auth");
-  };
-
-  console.log(ordersList);
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function Profile() {
 
       {ordersList.length > 0 ? (
         <div className={styles.ordersContainer}>
-          {ordersList.map((order) => {
+          {ordersList.map((order) => (
             <div key={order._id} className={styles.orderContainer}>
               <p>{order.pickupStatus}</p>
               <h1>{order.pickupTime}</h1>
@@ -48,8 +48,8 @@ export default function Profile() {
                   <p>Quantity: {item.quantity}</p>
                 </div>;
               })}
-            </div>;
-          })}
+            </div>
+          ))}
         </div>
       ) : (
         <div>You do not have orders yet</div>
