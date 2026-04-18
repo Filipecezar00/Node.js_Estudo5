@@ -4,41 +4,54 @@ import OrdersControllers from "../controllers/orders.js";
 const ordersRouter = express.Router();
 const OrderControllers = new OrdersControllers();
 
-ordersRouter.get("/", async (req, res) => {
-  const { success, statusCode, body } = await OrderControllers.getOrders(
-    req.body,
-  );
-  res.status(statusCode).send({ success, body, statusCode });
+const handleResponse = (res, result) => {
+  const { success, statusCode, body } = result;
+  res.status(statusCode).json({ success, body, statusCode });
+};
+
+ordersRouter.get("/", async (req, res, next) => {
+  try {
+    const result = await OrderControllers.getOrders(req.query);
+    handleResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 });
 
-ordersRouter.get("/userorders/:id", async (req, res) => {
-  const { success, statusCode, body } =
-    await OrderControllers.getOrdersByUserId(req.params.id);
-  res.status(statusCode).send({ success, body, statusCode });
+ordersRouter.get("/userorders/:id", async (req, res, next) => {
+  try {
+    const result = await OrderControllers.getOrdersByUserId(req.params.id);
+    handleResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 });
 
-ordersRouter.post("/", async (req, res) => {
-  const { body, success, statusCode } = await OrderControllers.addOrders(
-    req.body,
-  );
-  res.status(statusCode).send({ body, success, statusCode });
+ordersRouter.post("/", async (req, res, next) => {
+  try {
+    const result = await OrderControllers.addOrders(req.body);
+    handleResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 });
 
-ordersRouter.delete("/:id", async (req, res) => {
-  const OrderId = req.params.id;
-  const { success, statusCode, body } =
-    await OrderControllers.deleteOrders(OrderId);
-
-  res.status(statusCode).send({ success, statusCode, body });
+ordersRouter.delete("/:id", async (req, res, next) => {
+  try {
+    const result = await OrderControllers.deleteOrders(req.params.id);
+    handleResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 });
 
-ordersRouter.put("/:id", async (req, res) => {
-  const { success, statusCode, body } = await OrderControllers.updateOrders(
-    req.params.id,
-    req.body,
-  );
-
-  res.status(statusCode).send({ success, statusCode, body });
+ordersRouter.put("/:id", async (req, res, next) => {
+  try {
+    const result = await OrderControllers.updateOrders(req.params.id, req.body);
+    handleResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default ordersRouter;
