@@ -1,38 +1,46 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-export default function orderServices() {
+export default function useOrderServices() {
   const [orderLoading, setOrderLoading] = useState(false);
-  const [refetchOrders, setRefetchOrders] = useState(true);
+  const [error, setError] = useState("");
   const [ordersList, setOrdersList] = useState([]);
 
-  const url = "http://localhost:3000/order";
+  const url = "http://localhost:3000";
 
-  const getUserOrders = (userId) => {
-    setOrderLoading(true);
+  const getUserOrders = useCallback(
+    async (userId) => {
+      if (!userId) return;
 
-    fetch(`${url}/userorders/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Acess-Control-Allow-Origin": "*",
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
+      setOrderLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(`${url}/userorders/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`Erro no servidor: ${response.status}`);
+        }
+        const result = await response.json();
+
         if (result.success) {
           setOrdersList(result.body);
         } else {
-          console.log(result);
+          throw new Error(result.message || "Falha ao buscar Pedidos");
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
+      } catch (err) {
+        console.error("Erro na camada de serviço (orders):", err);
+        setError(err.message);
+        setOrdersList([]);
+      } finally {
         setOrderLoading(false);
-        setRefetchOrders(true);
-      });
-  };
+      }
+    },
+    [url],
+  );
 
-  return { getUserOrders, orderLoading, refetchOrders, ordersList };
+  return { getUserOrders, orderLoading, ordersList, error };
 }
