@@ -45,9 +45,12 @@ export default function Profile() {
               <p>{order.pickupStatus}</p>
               <h1>{order.pickupTime}</h1>
 
-              {order.orderItems.map((item) => (
-                <div key={item._id}>
-                  <h4>{item.itemDetails?.[0]?.name}</h4>
+              {order.orderItems.map((item, index) => (
+                <div key={item._id || index}>
+                  <h4>
+                    {item.itemDetails?.[0]?.name ||
+                      "THERE IS NOT A NAME FOR THIS PLATE"}
+                  </h4>
                   <p>Quantity: {item.quantity}</p>
                 </div>
               ))}
