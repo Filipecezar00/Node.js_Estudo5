@@ -1,5 +1,5 @@
 import OrdersDataAccess from "../dataAccess/orders.js";
-import { ok, serverError } from "../helpers/httpResponse.js";
+import { ok, serverError, badRequest } from "../helpers/httpResponse.js";
 
 export default class OrdersControllers {
   constructor() {
@@ -18,9 +18,9 @@ export default class OrdersControllers {
 
   async getOrdersByUserId(userId) {
     try {
-      const orderId = await this.dataAccess.getOrdersByUserId(userId);
+      const orders = await this.dataAccess.getOrdersByUserId(userId);
 
-      return ok(orderId);
+      return ok(orders);
     } catch (error) {
       console.error("ERRO NO PROCESSO DA ROTA GET DO ID USER:", error);
       return serverError(error);
@@ -61,7 +61,7 @@ export default class OrdersControllers {
 
   async updateOrders(OrdersId, OrdersData) {
     try {
-      const result = await this.dataAccess.updateOrders(OrdersId, OrdersData);
+      const result = await this.dataAccess.updateOrder(OrdersId, OrdersData);
 
       return ok(result);
     } catch (error) {
