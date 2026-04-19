@@ -2,10 +2,11 @@ import { useState, useCallback } from "react";
 
 export default function useOrderServices() {
   const [orderLoading, setOrderLoading] = useState(false);
+  const [refetchOrders, setRefetchOrders] = useState(true);
   const [error, setError] = useState("");
   const [ordersList, setOrdersList] = useState([]);
 
-  const url = "http://localhost:3000";
+  const url = "http://localhost:3000/orders";
 
   const getUserOrders = useCallback(
     async (userId) => {
@@ -15,7 +16,7 @@ export default function useOrderServices() {
       setError(null);
 
       try {
-        const response = await fetch(`${url}/order/userorders/${userId}`, {
+        const response = await fetch(`${url}/userorders/${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -28,19 +29,18 @@ export default function useOrderServices() {
 
         if (result.success) {
           setOrdersList(result.body);
-        } else {
-          throw new Error(result.message || "Falha ao buscar Pedidos");
         }
       } catch (err) {
-        console.error("Erro na camada de serviço (orders):", err);
+        console.error("Erro na camada de serviço:", err);
         setError(err.message);
         setOrdersList([]);
       } finally {
         setOrderLoading(false);
+        setRefetchOrders(false);
       }
     },
     [url],
   );
 
-  return { getUserOrders, orderLoading, ordersList, error };
+  return { getUserOrders, orderLoading, ordersList, error, refetchOrders };
 }
