@@ -33,9 +33,12 @@ export default function Profile() {
   }
 
   return (
-    <>
-      <h1>{authData?.user?.fullname}</h1>
-      <h3>{authData?.user?.email}</h3>
+    <div className={styles.pageContainer}>
+      <div>
+        <h1>{authData?.user?.fullname}</h1>
+        <h3>{authData?.user?.email}</h3>
+      </div>
+
       <button onClick={handleLogout}>Logout</button>
 
       {ordersList.length > 0 ? (
@@ -62,6 +65,6 @@ export default function Profile() {
       ) : (
         <div>You do not have orders yet</div>
       )}
-    </>
+    </div>
   );
 }
