@@ -101,7 +101,7 @@ export default class OrdersDataAccess {
           $group: {
             _id: "$_id",
             userDetails: { $first: "$userDetails" },
-            orderItems: { $push: "OrderItems" },
+            orderItems: { $push: "orderItems" },
             pickupStatus: { $first: "$pickupStatus" },
             pickupTime: { $first: "$pickupTime" },
           },
@@ -139,7 +139,7 @@ export default class OrdersDataAccess {
       item.orderId = new ObjectId(newOrder.insertedId);
     });
 
-    const result = await Mongo.db.collection("OrderItens").insertMany(items);
+    const result = await Mongo.db.collection("orderItems").insertMany(items);
 
     return result;
   }
@@ -149,7 +149,7 @@ export default class OrdersDataAccess {
 
     const itemsToDelete = await Mongo.db
       .collection("orderItems")
-      .deleteMany({ OrderId: new ObjectId(OrderId) });
+      .deleteMany({ orderId: new ObjectId(OrderId) });
 
     const orderToDelete = await Mongo.db
       .collection(collectionName)

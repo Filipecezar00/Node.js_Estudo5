@@ -17,10 +17,12 @@ export default function Profile() {
       return;
     }
     if (refetchOrders) {
-      getUserOrders(authData.user._id);
+      getUserOrders(authData?.user?._id);
     }
   }, [authData?.user?._id, refetchOrders, navigate, getUserOrders]);
 
+  console.log("Lista de pedidos que recebi:", ordersList);
+  console.log("ID que estou usando para buscar:", authData?.user?._id);
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -42,12 +44,13 @@ export default function Profile() {
             <div key={order._id} className={styles.orderContainer}>
               <p>{order.pickupStatus}</p>
               <h1>{order.pickupTime}</h1>
-              {order.orderItens.map((item) => {
+
+              {order.orderItems.map((item) => (
                 <div key={item._id}>
-                  <h4>{item.itemDetails[0].name}</h4>
+                  <h4>{item.itemDetails?.[0]?.name}</h4>
                   <p>Quantity: {item.quantity}</p>
-                </div>;
-              })}
+                </div>
+              ))}
             </div>
           ))}
         </div>

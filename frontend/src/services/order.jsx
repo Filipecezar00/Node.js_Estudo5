@@ -15,7 +15,7 @@ export default function useOrderServices() {
       setError(null);
 
       try {
-        const response = await fetch(`${url}/userorders/${userId}`, {
+        const response = await fetch(`${url}/order/userorders/${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
