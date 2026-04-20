@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import authServices from "../../services/auth";
 import orderServices from "../../services/order";
 import styles from "./page.module.css";
+import { LuLogOut, LuTimer } from "react-icons/lu";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 export default function Profile() {
   const { logout } = authServices();
@@ -39,13 +42,36 @@ export default function Profile() {
         <h3>{authData?.user?.email}</h3>
       </div>
 
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout}>
+        {" "}
+        <LuLogOut /> Logout
+      </button>
 
       {ordersList.length > 0 ? (
         <div className={styles.ordersContainer}>
           {ordersList.map((order) => (
             <div key={order._id} className={styles.orderContainer}>
-              <p>{order.pickupStatus}</p>
+              {order.pickupStatus === "Pending" ? (
+                <p className={`${styles.pickupStatus} ${styles.pending} `}>
+                  {" "}
+                  <LuTimer />
+                  {order.pickupStatus}
+                </p>
+              ) : null}
+              {order.pickupStatus === "Complete" ? (
+                <p className={`${styles.pickupStatus} ${styles.complete}`}>
+                  {" "}
+                  <FaCheckCircle />
+                  {order.pickupStatus}
+                </p>
+              ) : null}
+              {order.pickupStatus === "Canceled" ? (
+                <p className={`${styles.pickupStatus} ${styles.canceled}`}>
+                  {" "}
+                  <MdCancel />
+                  {order.pickupStatus}
+                </p>
+              ) : null}
               <h1>{order.pickupTime}</h1>
 
               {order.orderItems.map((item, index) => (
