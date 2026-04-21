@@ -23,6 +23,23 @@
   text-align: center;
   gap: 0.2em;
 }
+
+.socialButtonsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.socialButton {
+  margin: 10px;
+  padding: 5px;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
 @media screen and (max-width: 1000px) {
   .foodSection {
     grid-template-columns: repeat(2, 1fr);

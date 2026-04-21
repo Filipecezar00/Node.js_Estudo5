@@ -2,6 +2,12 @@ import styles from "./page.module.css";
 import Dessert from "../../../public/imgs/homepage/dessert";
 import NaturalFood from "../../../public/imgs/homepage/naturalFood";
 import Vegetable from "../../../public/imgs/homepage/vegetable";
+import {
+  FaFacebookSquare,
+  FaInstagram,
+  FaMapMarkerAlt,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -46,6 +52,33 @@ export default function Home() {
             Explore a world of flavors with our comprehensive offering, designed
             to satisfy your dreams.
           </p>
+        </div>
+      </section>
+
+      <section className={styles.contactSection}>
+        <h1>Stay updated</h1>
+        <p>
+          Enter the world of My Gastronomy by following us on social media,
+          you´ll always be updated on our culinary creations, special events,
+          and gourmet surprises. Don´t miss out on a single bite.{" "}
+        </p>
+        <div className={styles.socialButtonsContainer}>
+          <a className={styles.socialButton}>
+            <FaInstagram />
+            Instagram
+          </a>
+          <a className={styles.socialButton}>
+            <FaFacebookSquare />
+            Facebook
+          </a>{" "}
+          <a className={styles.socialButton}>
+            <FaWhatsapp />
+            Whatsapp
+          </a>
+          <a className={styles.socialButton}>
+            <FaMapMarkerAlt />
+            Location
+          </a>
         </div>
       </section>
     </div>
