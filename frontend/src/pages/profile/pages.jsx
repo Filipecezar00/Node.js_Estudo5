@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import { LuLogOut, LuTimer } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import Loading from "../loading/pages";
 
 export default function Profile() {
   const { logout } = authServices();
@@ -32,7 +33,7 @@ export default function Profile() {
   };
 
   if (orderLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (
