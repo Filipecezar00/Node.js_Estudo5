@@ -1,15 +1,24 @@
-.footerContainer {
+.footerContainer,
+.linksContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: #004643;
   color: #faf0ca;
 }
+
+.footerContainer {
+  gap: 1em;
+  padding-bottom: 0.5em;
+}
+
 .footerContainer img {
-  width: 7em;
+  width: 5em;
 }
 
 .link {
   color: #faf0ca;
+  text-decoration: none;
+  margin: 0.3em;
 }
