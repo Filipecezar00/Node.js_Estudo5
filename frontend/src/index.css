@@ -23,10 +23,7 @@ button {
   padding: 1em;
   border-radius: 2em;
   cursor: pointer;
-  display: flex;
   gap: 0.5em;
-  align-items: center;
-  justify-content: center;
 }
 p {
   display: flex;

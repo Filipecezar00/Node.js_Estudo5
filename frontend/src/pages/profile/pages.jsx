@@ -7,6 +7,7 @@ import { LuLogOut, LuTimer } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import Loading from "../loading/pages";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { logout } = authServices();
@@ -39,11 +40,11 @@ export default function Profile() {
   return (
     <div className={styles.pageContainer}>
       <div>
-        <h1>{authData?.user?.fullname}</h1>
-        <h3>{authData?.user?.email}</h3>
+        <h3 className={styles.name}>{authData?.user?.fullname}</h3>
+        <p className={styles.email}>{authData?.user?.email}</p>
       </div>
 
-      <button onClick={handleLogout}>
+      <button onClick={handleLogout} className={styles.btnLogout}>
         {" "}
         <LuLogOut /> Logout
       </button>
@@ -90,7 +91,14 @@ export default function Profile() {
           ))}
         </div>
       ) : (
-        <div>You do not have orders yet</div>
+        <div className="informationSpace">
+          <p>You do not have orders yet.</p>
+          <Link to={"/plates"}>
+            <button className={styles.platesLink}>
+              Click Here and see our specialities
+            </button>
+          </Link>
+        </div>
       )}
     </div>
   );

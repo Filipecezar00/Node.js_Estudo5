@@ -20,5 +20,22 @@
 .link {
   color: #faf0ca;
   text-decoration: none;
-  margin: 0.3em;
+  margin: 0.1em;
+  margin-right: 10px;
+  font-size: 0.8em;
+}
+.footer {
+}
+@media screen and (max-width: 400px) {
+  .footerContainer,
+  .linksContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #004643;
+    color: #faf0ca;
+    font-size: 14px;
+    margin-right: 3em;
+  }
 }
