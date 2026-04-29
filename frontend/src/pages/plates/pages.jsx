@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import usePlateServices from "../../services/plate";
+import userId from "../../services/plate";
+import Loading from "../loading/pages";
 
 export default function Plates() {
   const { getPlate, plateList, plateLoading, refetchPlate } =
     usePlateServices();
   useEffect(() => {
     if (refetchPlate) {
-      getPlate();
+      getPlate(userId);
     }
-  }, [refetchPlate]);
+  }, [refetchPlate, getPlate, userId]);
 
   if (plateLoading) {
     return <Loading />;

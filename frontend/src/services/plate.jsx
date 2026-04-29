@@ -6,7 +6,7 @@ export default function usePlateServices() {
   const [error, setError] = useState(null);
   const [plateList, setPlateList] = useState([]);
 
-  const BASE_URL = "http://localhost:3000/orders";
+  const BASE_URL = "http://localhost:3000/plates";
 
   const getPlate = useCallback(async (userId) => {
     if (!userId) return;
