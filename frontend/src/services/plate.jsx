@@ -8,9 +8,7 @@ export default function usePlateServices() {
 
   const BASE_URL = "http://localhost:3000/plates";
 
-  const getPlate = useCallback(async (userId) => {
-    if (!userId) return;
-
+  const getPlate = useCallback(async () => {
     setPlateLoading(true);
     setError(null);
 
@@ -37,7 +35,7 @@ export default function usePlateServices() {
       setPlateLoading(false);
       setRefetchPlate(false);
     }
-  });
+  }, []);
 
-  return { getPlate, plateLoading, refetchPlate, plateList };
+  return { getPlate, plateLoading, refetchPlate, plateList, error };
 }
