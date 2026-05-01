@@ -1,6 +1,7 @@
 import styles from "./plateCard.module.css";
 
 export default function PlateCard({ plateData }) {
+  console.log(plateData);
   return (
     <>
       <div className={styles.cardContainer}>

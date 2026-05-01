@@ -21,7 +21,7 @@ export default function Plates() {
     <>
       <div>
         {plateList.map((plate) => {
-          <PlateCard plateData={plate} key={plate._id} />;
+          return <PlateCard plateData={plate} key={plate._id} />;
         })}
       </div>
     </>
