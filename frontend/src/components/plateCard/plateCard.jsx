@@ -9,7 +9,7 @@ export default function PlateCard({ plateData }) {
         <div className={styles.cardContent}>
           <h4>{plateData.name}</h4>
           <p>{plateData.description}</p>
-          <h4>{plateData.price}</h4>
+          <h4 className={styles.price}>R$ {plateData.price}</h4>
         </div>
       </div>
     </>
