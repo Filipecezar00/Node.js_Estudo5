@@ -1,0 +1,9 @@
+.popupContainer {
+  background-color: #faf0ca;
+  color: #004643;
+}
+.popupContainer img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}

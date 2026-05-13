@@ -3,6 +3,7 @@ import usePlateServices from "../../services/plate";
 import Loading from "../loading/pages";
 import PlateCard from "../../components/plateCard/plateCard";
 import styles from "./page.module.css";
+import PlatePopup from "../../components/plateCard/platePopUp/platePopUp";
 
 export default function Plates() {
   const { getPlate, plateList, plateLoading, refetchPlate } =
@@ -32,7 +33,7 @@ export default function Plates() {
   return (
     <>
       <div>
-        {plateList.map((plate) => {
+        {plateList.map((plate) => (
           <div
             key={plate._id}
             className={styles.cardContainer}
@@ -41,9 +42,14 @@ export default function Plates() {
             }}
           >
             <PlateCard plateData={plate} key={plate._id} />;
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
+      {plateSelected && (
+        <>
+          <PlatePopup plateData={plateSelected} />
+        </>
+      )}
     </>
   );
 }
