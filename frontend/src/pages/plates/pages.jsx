@@ -1,16 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import usePlateServices from "../../services/plate";
 import Loading from "../loading/pages";
 import PlateCard from "../../components/plateCard/plateCard";
+import styles from "./page.module.css";
 
 export default function Plates() {
   const { getPlate, plateList, plateLoading, refetchPlate } =
     usePlateServices();
+
+  const [plateSelected, setPlateSelected] = useState(null);
+
   useEffect(() => {
     if (refetchPlate) {
       getPlate();
     }
   }, [refetchPlate, getPlate]);
+
+  const handlePlatesSelected = (plate) => {
+    setPlateSelected(plate);
+  };
+
+  const handleClosePopup = () => {
+    setPlateSelected(null);
+  };
 
   if (plateLoading) {
     return <Loading />;
@@ -21,7 +33,15 @@ export default function Plates() {
     <>
       <div>
         {plateList.map((plate) => {
-          return <PlateCard plateData={plate} key={plate._id} />;
+          <div
+            key={plate._id}
+            className={styles.cardContainer}
+            onClick={() => {
+              handlePlatesSelected(plate);
+            }}
+          >
+            <PlateCard plateData={plate} key={plate._id} />;
+          </div>;
         })}
       </div>
     </>
