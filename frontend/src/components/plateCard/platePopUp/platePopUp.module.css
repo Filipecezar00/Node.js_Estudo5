@@ -7,3 +7,10 @@
   width: 100%;
   object-fit: cover;
 }
+.popupContent {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}

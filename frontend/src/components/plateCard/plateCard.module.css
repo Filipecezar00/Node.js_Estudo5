@@ -16,7 +16,7 @@
 .cardContent {
   position: absolute;
   color: #fff;
-  padding: 0.5em;
+  width: 90%;
 }
 
 .cardContainer:before {
@@ -32,5 +32,9 @@
 }
 
 .price {
-  text-align: right;
+  text-align: left;
+  margin: 0.5em;
+}
+.name {
+  margin: 0.5em;
 }

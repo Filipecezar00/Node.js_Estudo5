@@ -41,7 +41,7 @@ export default function Plates() {
               handlePlatesSelected(plate);
             }}
           >
-            <PlateCard plateData={plate} key={plate._id} />;
+            <PlateCard plateData={plate} key={plate._id} />
           </div>
         ))}
       </div>
