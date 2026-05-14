@@ -47,7 +47,7 @@ export default function Plates() {
       </div>
       {plateSelected && (
         <>
-          <PlatePopup plateData={plateSelected} />
+          <PlatePopup plateData={plateSelected} onClose={handleClosePopup} />
         </>
       )}
     </>
