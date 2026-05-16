@@ -1,0 +1,43 @@
+.itemContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1em;
+}
+.itemContainer img {
+  width: 250px;
+  border-radius: 2em;
+}
+.itensListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.itemContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.portionContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.portionBtns {
+  display: flex;
+  gap: 0.2em;
+}
+
+.confirmBtn {
+  position: fixed;
+  font-size: x-large;
+  bottom: 2em;
+  margin: 0 auto;
+}
