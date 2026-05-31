@@ -4,10 +4,13 @@ import styles from "./page.module.css";
 import { FaMinus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ConfirmOrderPopUp from "../../components/ConfirmOrderPopUp/ConfirmOrderPopUp";
+import orderServices from "../../services/order";
 
 export default function Cart() {
-  const { cartItens, updateCartItems, removeFromCart } = useCartContext();
+  const { cartItens, updateCartItems, removeFromCart, clearCart } =
+    useCartContext();
   const [confirmPopupOpen, setConfirmPopupOpen] = useState(false);
+  const { sendOrder } = orderServices();
 
   const handleChangeItemQty = (mode, itemId) => {
     const updateCartItem = cartItens.map((item) => {
@@ -32,7 +35,9 @@ export default function Cart() {
     orderData.items = cartItens.map((item) => {
       return { plateId: item._id, quantity: item.quantity };
     });
-    console.log(orderData);
+    sendOrder(orderData);
+    setConfirmPopupOpen(!confirmPopupOpen);
+    clearCart();
   };
 
   const navigate = useNavigate();
