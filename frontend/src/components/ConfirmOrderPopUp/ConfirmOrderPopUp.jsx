@@ -9,7 +9,8 @@ export default function ConfirmOrderPopUp({ open, onClose, onConfirm }) {
   const authData = JSON.parse(localStorage.getItem("auth"));
   const navigate = useNavigate();
 
-  const handleConfirm = () => {
+  const handleConfirm = (e) => {
+    e.preventDefault();
     if (!authData?.user?._id) {
       return navigate("/auth");
     } else {
@@ -20,7 +21,7 @@ export default function ConfirmOrderPopUp({ open, onClose, onConfirm }) {
           userId: authData?.user?._id,
           pickupTime: formData?.pickupTime,
         };
-        console.log(orderData);
+        onConfirm(orderData);
       }
     }
   };

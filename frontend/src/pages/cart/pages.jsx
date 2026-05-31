@@ -23,11 +23,15 @@ export default function Cart() {
     updateCartItems(updateCartItem);
   };
 
-  const handleOpenPopup = () => {
+  const handleOpenPopup = (e) => {
+    e.preventDefault();
     setConfirmPopupOpen(!confirmPopupOpen);
   };
 
   const handleConfirmOrder = (orderData) => {
+    orderData.items = cartItens.map((item) => {
+      return { plateId: item._id, quantity: item.quantity };
+    });
     console.log(orderData);
   };
 
