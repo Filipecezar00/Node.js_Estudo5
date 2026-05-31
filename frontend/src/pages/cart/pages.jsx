@@ -3,8 +3,21 @@ import styles from "./page.module.css";
 import { FaMinus } from "react-icons/fa";
 
 export default function Cart() {
-  const { cartItens } = useCartContext();
+  const { cartItens, updateCartItems, removeFromCart } = useCartContext();
 
+  const handleChangeItemQty = (mode, itemId) => {
+    const updateCartItem = cartItens.map((item) => {
+      if (item._id === itemId) {
+        if (mode === "less" && item.quantity > 1) {
+          item.quantity -= 1;
+        } else if (mode === "more") {
+          item.quantity += 1;
+        }
+      }
+      return item;
+    });
+    updateCartItems(updateCartItem);
+  };
   console.log(cartItens);
 
   if (!cartItens.length) {
@@ -31,11 +44,27 @@ export default function Cart() {
                   <p>Portions:</p>
                   <p>{item.quantity}</p>
                   <div className={styles.portionBtns}>
-                    <button>-</button>
-                    <button>+</button>
+                    <button
+                      onClick={() => {
+                        handleChangeItemQty("less", item._id);
+                      }}
+                    >
+                      -
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleChangeItemQty("more", item._id);
+                      }}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-                <button>
+                <button
+                  onClick={() => {
+                    removeFromCart(item._id);
+                  }}
+                >
                   <FaMinus /> Remove Item
                 </button>
               </div>

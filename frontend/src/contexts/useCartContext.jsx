@@ -20,10 +20,22 @@ export function CartProvider({ children }) {
     console.log(cartItens);
   };
 
-  const removeFromCart = (itemId) => {};
+  const removeFromCart = (itemId) => {
+    const cartItemsSanitized = cartItens.filter((item) => {
+      return item._id !== itemId;
+    });
+
+    setCartItens(cartItemsSanitized);
+  };
+
+  const updateCartItems = (items) => {
+    setCartItens(items);
+  };
 
   return (
-    <CartContext.Provider value={{ removeFromCart, addToCart, cartItens }}>
+    <CartContext.Provider
+      value={{ removeFromCart, addToCart, cartItens, updateCartItems }}
+    >
       {children}
     </CartContext.Provider>
   );
