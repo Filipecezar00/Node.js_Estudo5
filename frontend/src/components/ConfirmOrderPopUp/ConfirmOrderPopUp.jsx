@@ -2,12 +2,27 @@ import { Dialog } from "@mui/material";
 import styles from "./ConfirmOrderPopUp.module.css";
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function ConfirmOrderPopUp({ open, onClose, onConfirm }) {
   const [formData, setFormData] = useState(null);
+  const authData = JSON.parse(localStorage.getItem("auth"));
+  const navigate = useNavigate();
 
   const handleConfirm = () => {
-    onConfirm(orderData);
+    if (!authData?.user?._id) {
+      return navigate("/auth");
+    } else {
+      if (!formData.pickupTime) {
+        return;
+      } else {
+        const orderData = {
+          userId: authData?.user?._id,
+          pickupTime: formData?.pickupTime,
+        };
+        console.log(orderData);
+      }
+    }
   };
   const handleFormDataChange = (e) => {
     setFormData({
@@ -16,7 +31,7 @@ export default function ConfirmOrderPopUp({ open, onClose, onConfirm }) {
     });
   };
   return (
-    <Dialog open={true} onClose={onClose}>
+    <Dialog open={open} onClose={onClose}>
       <div className={styles.popupContainer}>
         <h2>We're almost there...</h2>
         <p>
@@ -32,10 +47,16 @@ export default function ConfirmOrderPopUp({ open, onClose, onConfirm }) {
             name="pickupTime"
           />
           <div className={styles.confirmBtns}>
-            <button className={styles.cancelBtn} onClick={() => onClose()}>
+            <button
+              type="button"
+              className={styles.cancelBtn}
+              onClick={onClose}
+            >
               Cancel
             </button>
-            <button onClick={handleConfirm}>Confirm</button>
+            <button type="submit" onClick={handleConfirm}>
+              Confirm
+            </button>
           </div>
         </form>
       </div>

@@ -7,7 +7,7 @@ import ConfirmOrderPopUp from "../../components/ConfirmOrderPopUp/ConfirmOrderPo
 
 export default function Cart() {
   const { cartItens, updateCartItems, removeFromCart } = useCartContext();
-  const { confirmPopupOpen, setConfirmPopupOpen } = useState(false);
+  const [confirmPopupOpen, setConfirmPopupOpen] = useState(false);
 
   const handleChangeItemQty = (mode, itemId) => {
     const updateCartItem = cartItens.map((item) => {
