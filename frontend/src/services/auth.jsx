@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function authServices() {
   const [authLoading, setAuthLoading] = useState(false);
 
-  const url = "http://localhost:3000/auth";
+  const url = "https://backendecommerce-0tui.onrender.com/auth";
 
   const login = async (formData) => {
     setAuthLoading(true);

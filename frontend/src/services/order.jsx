@@ -6,7 +6,7 @@ export default function useOrderServices() {
   const [error, setError] = useState("");
   const [ordersList, setOrdersList] = useState([]);
 
-  const url = "http://localhost:3000/orders";
+  const url = "https://backendecommerce-0tui.onrender.com/orders";
 
   const getUserOrders = useCallback(
     async (userId) => {

@@ -6,7 +6,7 @@ export default function usePlateServices() {
   const [error, setError] = useState(null);
   const [plateList, setPlateList] = useState([]);
 
-  const BASE_URL = "http://localhost:3000/plates";
+  const BASE_URL = "https://backendecommerce-0tui.onrender.com/plates";
 
   const getPlate = useCallback(async () => {
     setPlateLoading(true);
